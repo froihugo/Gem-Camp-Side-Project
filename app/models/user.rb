@@ -8,4 +8,6 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates_format_of :username, :with => /^[A-Za-z\d ]*$/, :multiline => true
 
+  validates :phone, phone: { uniqueness: true, allow_blank: true, countries: [:ph] }
+
 end
