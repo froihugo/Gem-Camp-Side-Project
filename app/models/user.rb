@@ -10,4 +10,5 @@ class User < ApplicationRecord
 
   validates :phone, phone: { uniqueness: true, allow_blank: true, countries: [:ph] }
 
+  enum role: { client: 0, admin: 1 }
 end
