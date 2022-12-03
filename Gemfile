@@ -16,6 +16,7 @@ gem "bootsnap", require: false
 gem "devise"
 gem "phonelib"
 gem "carrierwave"
+gem "mini_magick"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

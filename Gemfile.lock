@@ -218,6 +218,7 @@ DEPENDENCIES
   devise
   jbuilder
   jsbundling-rails
+  mini_magick
   mysql2 (~> 0.5)
   phonelib
   puma (~> 5.0)
