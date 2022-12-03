@@ -1,0 +1,6 @@
+<%= image_tag @user.avatar.url(:thumb) if @user.avatar.present? %>
+<h1><%= @user.username %></h1>
+<h1><%= @user.email %></h1>
+<h1><%= @user.phone %></h1>
+
+<%= link_to 'Profile', edit_user_registration_path, :class => 'navbar-link nav-item active' %>
