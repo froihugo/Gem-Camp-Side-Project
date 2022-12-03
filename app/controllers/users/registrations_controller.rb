@@ -61,11 +61,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   #
-      protected
-      def configure_permitted_parameters
-        attr_update = [:phone, :username, :email, :password, :password_confirmation, :remember_me]
-        devise_parameter_sanitizer.permit :account_update, keys: attr_update
-        attr_sign_up = [:phone, :username, :email, :password, :password_confirmation, :remember_me]
-        devise_parameter_sanitizer.permit :sign_up, keys: attr_sign_up
-      end
+  protected
+
+  def configure_permitted_parameters
+    attr_update = [:user_id, :avatar, :avatar_cache, :remove_avatar, :phone, :username, :email, :password, :password_confirmation, :remember_me]
+    devise_parameter_sanitizer.permit :account_update, keys: attr_update
+    attr_sign_up = [:user_id, :avatar, :avatar_cache, :phone, :username, :email, :password, :password_confirmation, :remember_me]
+    devise_parameter_sanitizer.permit :sign_up, keys: attr_sign_up
+  end
+
+  def after_update_path_for(resource)
+    @user_path
+  end
+  
 end
