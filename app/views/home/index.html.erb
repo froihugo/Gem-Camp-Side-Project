@@ -1,1 +1,3 @@
+<%= link_to "EN", params.permit!.merge(locale: 'en') %>
+<%= link_to "PH", params.permit!.merge(locale: 'ph') %>
 <h1><%= t( "hello", name: current_user.username) if current_user %></h1>
