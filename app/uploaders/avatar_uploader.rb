@@ -29,7 +29,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  process resize_to_fit: [500, 500]
+  process resize_to_fill: [500, 500]
 
   version :thumb do
     process resize_to_fit: [500, 500]
@@ -48,6 +48,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   def default_url(*args)
-    ActionController::Base.helpers.asset_path("avatars/" + [version_name, "default-avatar.gif"].compact.join('_'))
-  end
+      ActionController::Base.helpers.asset_path("avatars/" + [version_name, "default.png"].compact.join('_'))
+    end
 end
