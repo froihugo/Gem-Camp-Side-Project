@@ -1,12 +1,12 @@
 <h2>Register</h2>
 
-<div class="btn-group" role="group" aria-label="Basic example">
-  <%= link_to 'Login', new_user_session_path, class: "btn btn-outline-dark" %>
-  <button type="button" class="btn btn-outline-dark active">Register</button>
-</div>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
+
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <%= link_to 'Login', new_user_session_path, class: "btn btn-outline-dark" %>
+    <button type="button" class="btn btn-outline-dark active">Register</button>
+  </div>
 
   <div class="field">
     <%= f.label :username %><br />

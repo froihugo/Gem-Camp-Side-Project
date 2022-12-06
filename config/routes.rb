@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :user,
+  devise_for :users,
              :controllers => {
                :registrations => 'users/registrations',
                :sessions => 'users/sessions',
              }
-resources :users
-get '/users/:id', to: 'users#show'
+
+  resources :users, only: :show, :path => :username
+  match '/:username' => 'users#show', :via => :get, as: 'profile'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

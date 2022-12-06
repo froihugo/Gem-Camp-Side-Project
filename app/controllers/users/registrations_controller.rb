@@ -66,7 +66,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_permitted_parameters
     attr_update = [:user_id, :avatar, :avatar_cache, :remove_avatar, :phone, :username, :email, :password, :password_confirmation, :remember_me]
     devise_parameter_sanitizer.permit :account_update, keys: attr_update
-    attr_sign_up = [:email, :password, :password_confirmation, :remember_me]
+    attr_sign_up = [:username, :email, :password, :password_confirmation, :remember_me]
     devise_parameter_sanitizer.permit :sign_up, keys: attr_sign_up
   end
 
