@@ -1,3 +1,5 @@
+<% if @user.present? %>
+
 <div>
 <%= image_tag @user.avatar.url %>
 </div>
@@ -7,3 +9,9 @@
 <h1><%= @user.phone %></h1>
 
 <%= link_to 'Edit Profile', edit_user_registration_path, :class => 'btn btn-primary' if @user == current_user %>
+
+<% else %>
+
+<h1 class="display-1 text-muted">USER DOES NOT EXIST!</h1>
+
+<% end %>
