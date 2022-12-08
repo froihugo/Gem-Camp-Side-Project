@@ -9,6 +9,7 @@
 <h1><%= @user.phone %></h1>
 
 <%= link_to 'Edit Profile', edit_user_registration_path, :class => 'btn btn-primary' if @user == current_user %>
+<%= link_to 'Address Book', address_book_path, :class => 'btn btn-primary' if @user == current_user %>
 
 <% else %>
 

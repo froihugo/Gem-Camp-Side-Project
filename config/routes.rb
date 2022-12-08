@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-constraints(ClientDomainConstraint.new) do
-    root "home#index"
+  constraints(ClientDomainConstraint.new) do
     devise_for :users, :controllers => { :registrations => 'users/registrations', :sessions => 'users/sessions' }
-    resource :users, only: [:show]
-    get 'users/:id' => 'users#show', as: :user
+    root "home#index"
+    get 'address_book', to: 'users/addresses#index'
+    resource :users, only: [:show], :path => '/:username' do
+      resources :addresses, except: [:index], :controller => 'users/addresses'
+      post 'addresses/new', to: 'users/addresses#create'
+      patch 'addresses/edit', to: 'users/addresses#update'
+    end
   end
 
   constraints(AdminDomainConstraint.new) do

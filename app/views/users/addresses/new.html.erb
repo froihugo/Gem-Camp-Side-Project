@@ -1,0 +1,43 @@
+<%= form_with model: @address, url: new_users_address_path, data: { turbo: false } do |form| %>
+  <% if @address.errors.any? %>
+    <ul>
+      <% @address.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <h1>Add Address</h1>
+
+  <div class="field">
+    <%= form.label :name %><br/>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone_number %><br/>
+    <%= form.text_field :phone_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :remark %><br/>
+    <%= form.text_field :remark %>
+  </div>
+
+    <div class="field">
+      <%= form.label :genre %>
+      <%= form.select :genre, [ :home, :office ] %>
+    </div>
+
+  <div class="field">
+    <%= form.label :street_address %><br/>
+    <%= form.text_field :street_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_default %>
+    <%= form.check_box :is_default %>
+  </div>
+  
+  <%= form.submit %>
+<% end %>
