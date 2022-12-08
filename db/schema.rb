@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_03_080919) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_06_165258) do
+  create_table "addresses", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "phone_number"
+    t.text "remark"
+    t.string "street_address"
+    t.boolean "is_default", default: false
+    t.integer "genre", default: 0, null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
