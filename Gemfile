@@ -17,6 +17,8 @@ gem "devise"
 gem "phonelib"
 gem "carrierwave"
 gem "mini_magick"
+gem "rest-client"
+gem 'active_model_serializers'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
