@@ -59,7 +59,7 @@ class Users::AddressesController < ApplicationController
   end
 
   def validate_user_address_owner
-    unless user_signed_in = current_user
+    unless @user = current_user
       flash[:notice] = 'ERROR'
       redirect_to users_addresses_path
     end
