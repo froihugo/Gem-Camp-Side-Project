@@ -5,7 +5,7 @@ class Users::AddressesController < ApplicationController
   before_action :set_user
 
   def index
-    @addresses = current_user.addresses.includes(:user)
+    @addresses = current_user.addresses.includes(:user, :region, :province, :city, :barangay)
   end
 
   def new
@@ -47,7 +47,7 @@ class Users::AddressesController < ApplicationController
   private
 
   def address_params
-    params.require(:address).permit(:name, :genre, :street_address, :phone_number, :is_default, :remark)
+    params.require(:address).permit(:name, :genre, :street_address, :phone_number, :is_default, :remark, :address_region_id, :address_province_id, :address_city_id, :address_barangay_id)
   end
 
   def set_user
