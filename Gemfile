@@ -19,6 +19,7 @@ gem "carrierwave"
 gem "mini_magick"
 gem "rest-client"
 gem 'active_model_serializers'
+gem 'jquery'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
