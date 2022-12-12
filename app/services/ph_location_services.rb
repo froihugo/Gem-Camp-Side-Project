@@ -15,7 +15,6 @@ class PhLocationServices
     end
   end
 
-
   def fetch_province
     request = RestClient.get("#{url}/provinces")
     data = JSON.parse(request.body)
@@ -41,33 +40,26 @@ class PhLocationServices
   def fetch_city
     request = RestClient.get("#{url}/cities-municipalities")
     data = JSON.parse(request.body)
-
     data.each do |city|
       address_city = Address::City.find_or_initialize_by(code: city['code'])
-
-      if city['regionCode'] == '130000000'
-        district = Address::Province.find_by(code: city['districtCode'])
-        address_city.province = district
-        address_city.name = city['name']
+      if city['districtCode'].present?
+        province = Address::Province.find_by(code: city['districtCode'])
+        Address::City.find_or_create_by(code: city['code'], name: city['name'], province: province)
         address_city.save
-
-      elsif city['name'] == "City of Isabela"
-        province = Address::Province.find_by_name('Basilan')
-        Address::City.find_or_create_by(code: city['code'], name: city['name'])
-        address_city.province = province
-        address_city.save
-
-      elsif city['name'] == "City of Cotabato"
-        province = Address::Province.find_by_name('Maguindanao')
-        Address::City.find_or_create_by(code: city['code'], name: city['name'])
-        address_city.province = province
-        address_city.save
-
-      else
+      elsif city['provinceCode'].present?
         province = Address::Province.find_by(code: city['provinceCode'])
-        address_city.province = province
-        address_city.name = city['name']
+        Address::City.find_or_create_by(code: city['code'], name: city['name'], province: province)
         address_city.save
+      else
+        if city['name'] == "City of Isabela"
+          province = Address::Province.find_by_name('Basilan')
+          Address::City.find_or_create_by(code: city['code'], name: city['name'], province: province)
+          address_city.save
+        elsif city['name'] == "City of Cotabato"
+          province = Address::Province.find_by_name('Maguindanao')
+          Address::City.find_or_create_by(code: city['code'], name: city['name'], province: province)
+          address_city.save
+        end
       end
     end
   end
