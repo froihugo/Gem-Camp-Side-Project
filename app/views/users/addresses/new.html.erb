@@ -38,6 +38,31 @@
     <%= form.label :is_default %>
     <%= form.check_box :is_default %>
   </div>
-  
+
+  <div>
+    <%= form.collection_select :address_region_id,
+    Address::Region.all, :id, :name,
+    { prompt: 'SELECT REGION' },
+    data: { action: 'change->location#fetchProvinces', location_target: 'selectRegionId' } %>
+  </div>
+
+  <div>
+    <%= form.collection_select :address_province_id,
+    [], nil, nil, { prompt: 'SELECT PROVINCE/DISTRICT' },
+    data: { action: 'change->location#fetchCities', location_target: 'selectProvinceId' } %>
+  </div>
+
+    <div>
+      <%= form.collection_select :address_city_id,
+      [], nil, nil, { prompt: 'SELECT MUNICIPALITY' },
+      data: { action: 'change->location#fetchBarangays', location_target: 'selectCityId' } %>
+    </div>
+
+    <div>
+      <%= form.collection_select :address_barangay_id,
+      [], nil, nil, { prompt: 'SELECT BARANGAY' },
+      data: { location_target: 'selectBarangayId' } %>
+    </div>
+    
   <%= form.submit %>
 <% end %>
