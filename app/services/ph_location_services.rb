@@ -27,12 +27,8 @@ class PhLocationServices
       address_province.name = province['name']
       address_province.save
     end
-  end
-
-  def fetch_district
     request = RestClient.get("#{url}/districts")
     data = JSON.parse(request.body)
-
     data.each do |district|
       address_districts = Address::Province.find_or_initialize_by(code: district['code'])
       region = Address::Region.find_by_code(district['regionCode'])
