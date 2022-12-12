@@ -1,6 +1,7 @@
 class Api::ProvincesController < ApplicationController
   def index
-    province = Address::Provinces.all
-    render json: province, each_serializer: ProvinceSerializer
+    region = Address::Region.find(params[:region_id])
+    provinces = region.provinces
+    render json: provinces, each_serializer: ProvinceSerializer
   end
 end

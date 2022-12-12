@@ -1,6 +1,7 @@
 class Api::BarangaysController < ApplicationController
   def index
-    barangay = Address::Barangays.all
-    render json: barangay, each_serializer: BarangaySerializer
+    cities = Address::City.find(params[:city_id])
+    barangays = cities.barangays
+    render json: barangays, each_serializer: BarangaySerializer
   end
 end
