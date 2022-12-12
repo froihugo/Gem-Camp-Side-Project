@@ -1,3 +1,7 @@
 class CitySerializer < ActiveModel::Serializer
-  attributes :name
+  attributes :name, :province, :id
+
+  def province
+    object.province.name
+  end
 end
