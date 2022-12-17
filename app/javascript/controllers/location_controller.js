@@ -31,7 +31,7 @@ export default class extends Controller {
     $(target).empty();
     $.ajax({
       type: 'GET',
-      url: '/api/regions/' + this.selectRegionIdTarget.value + '/provinces/' + this.selectProvinceIdTarget.value + '/city_municipalities',
+      url: '/api/regions/' + this.selectRegionIdTarget.value + '/provinces/' + this.selectProvinceIdTarget.value + '/cities',
       dataType: 'json',
       success: (response) => {
         console.log(response)
@@ -54,7 +54,7 @@ export default class extends Controller {
     $(target).empty();
     $.ajax({
       type: 'GET',
-      url: '/api/regions/' + this.selectRegionIdTarget.value + '/provinces/' + this.selectProvinceIdTarget.value + '/city_municipalities/' + this.selectCityIdTarget.value + '/barangays',
+      url: '/api/regions/' + this.selectRegionIdTarget.value + '/provinces/' + this.selectProvinceIdTarget.value + '/cities/' + this.selectCityIdTarget.value + '/barangays',
       dataType: 'json',
       success: (response) => {
         console.log(response)
