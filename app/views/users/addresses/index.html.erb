@@ -8,6 +8,7 @@
       <th scope="col">Other Notes</th>
       <th scope="col">Label</th>
       <th scope="col">House/Unit/Flr #, Bldg Name, Blk or Lot #</th>
+      <th scope="col">Postcode</th>
       <th scope="col">Default Address?</th>
       <th>action</th>
     </tr>
@@ -22,6 +23,9 @@
       <td><%= address.remark %></td>
       <td><%= address.genre.upcase %></td>
       <td><%= address.street_address %></td>
+      <td class="col-2"><%="
+      #{address.region&.name},\n#{address.province&.name},\n#{address.city&.name},\n#{address.barangay&.name}.\n
+      "%></td>
 
       <% if address.is_default?  %>
         <td>Default</td>
