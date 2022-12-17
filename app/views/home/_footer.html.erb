@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top border border-dark">
+  <div class="container">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item px-2">
+            <%= link_to 'Invites', users_invites_path(current_user.username), :class => 'btn btn-dark' %>
+            </li>
+    </ul>
+    </div>
+  </div>
+</nav>
+<% end %>
