@@ -4,12 +4,18 @@
   <td>ID</td>
   <td>EMAIL</td>
   <td>ROLE</td>
+  <td>PARENT EMAIL</td>
+  <td>CHILDREN MEMBERS</td>
   </thead>
   <% @users.each do |user| %>
     <tr>
       <td><%= user.id %></td>
       <td><%= user.email %></td>
       <td><%= user.role %></td>
+      <td><%= user.parent&.email %>
+      <td><% user.children_members.each do |children_members| %>
+        <li class="list-group-item"><%= children_members.email %></li>
+      <% end %>
     </tr>
   <% end %>
 </table>
