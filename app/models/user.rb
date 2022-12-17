@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
+  belongs_to :parent, class_name: 'User', optional: true, counter_cache: :children_members
+  has_many :children_members, class_name: "User", foreign_key: 'parent_id'
+
   has_many :addresses
 
   mount_uploader :avatar, AvatarUploader
