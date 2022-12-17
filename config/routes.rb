@@ -19,6 +19,10 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :users, only: [:show], :path => '/:username' do
+      resources :invites, only: :index
+    end
+
   end
 
   constraints(AdminDomainConstraint.new) do

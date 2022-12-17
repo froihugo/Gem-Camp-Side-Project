@@ -9,6 +9,17 @@
   </div>
 
   <div class="field">
+  <%= f.label :promoter %><br/>
+  <%=
+    f.email_field :parent,
+    placeholder: "name@example.com",
+    class: 'text-muted',
+    value: cookies[:promoter],
+    readonly: true
+  %>
+   </div>
+
+  <div class="field">
     <%= f.label :username %><br />
     <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
   </div>

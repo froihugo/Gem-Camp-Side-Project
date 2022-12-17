@@ -6,14 +6,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+    unless cookies[:promoter]
+      cookies[:promoter] = params[:promoter]
+    end
+  end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    cookies[:promoter]
+    params[:user][:parent_id] = User.find_by(email: cookies[:promoter])&.id
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -61,17 +66,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   #
+
   protected
 
   def configure_permitted_parameters
     attr_update = [:user_id, :avatar, :avatar_cache, :remove_avatar, :phone, :username, :email, :password, :password_confirmation, :remember_me]
     devise_parameter_sanitizer.permit :account_update, keys: attr_update
-    attr_sign_up = [:username, :email, :password, :password_confirmation, :remember_me]
+    attr_sign_up = [:parent_id, :children_members, :username, :email, :password, :password_confirmation, :remember_me]
     devise_parameter_sanitizer.permit :sign_up, keys: attr_sign_up
   end
 
   def after_update_path_for(resource)
-    @user_path
+    new_user_registration_path
   end
   
 end
