@@ -54,7 +54,7 @@ export default class extends Controller {
     $(target).empty();
     $.ajax({
       type: 'GET',
-      url: '/api/regions/' + this.selectRegionIdTarget.value + '/provinces/' + this.selectProvinceIdTarget.value + '/city_municipalities/' + this.selectCityMunicipalityIdTarget.value + '/barangays',
+      url: '/api/regions/' + this.selectRegionIdTarget.value + '/provinces/' + this.selectProvinceIdTarget.value + '/city_municipalities/' + this.selectCityIdTarget.value + '/barangays',
       dataType: 'json',
       success: (response) => {
         console.log(response)
