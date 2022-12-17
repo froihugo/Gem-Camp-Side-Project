@@ -26,8 +26,9 @@ Rails.application.routes.draw do
   end
 
   constraints(AdminDomainConstraint.new) do
+    get '/',  to: "admin/home#index", as: 'admin_root'
     namespace :admin do
-      resources :users
+      resource :users, :controller => { :registrations => 'admin/sessions' }
     end
   end
 end
