@@ -1,1 +1,2 @@
 <h1><%= t( "hello", name: current_user.username) if current_user %></h1>
+<%= link_to 'Login', new_user_session_path, class: "btn btn-dark" %>
