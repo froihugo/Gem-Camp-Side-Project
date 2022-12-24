@@ -29,7 +29,9 @@ Rails.application.routes.draw do
     get '/',  to: "admin/home#index", as: 'admin_root'
       namespace :admin do
       devise_for :users, controllers: { sessions: 'admin/sessions' }
+        resources :items
         get 'users', to: 'users#index'
+        post 'items/new', to: 'items#create'
       end
     end
   end
