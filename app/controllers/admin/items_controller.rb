@@ -13,7 +13,7 @@ class Admin::ItemsController < ApplicationController
     @item = Item.new(item_params)
     if @item.save
       flash[:notice] = "Create Successfully"
-      redirect_to admins_items_path
+      redirect_to admin_items_path
     else
       render :new
     end
@@ -28,7 +28,7 @@ class Admin::ItemsController < ApplicationController
     @item.update(item_params)
     if @item.save
       flash[:notice] = "Update Successfully"
-      redirect_to admins_items_path
+      redirect_to admin_items_path
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class Admin::ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to admins_items_path
+    redirect_to admin_items_path
   end
 
   private

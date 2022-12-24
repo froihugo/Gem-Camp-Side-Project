@@ -6,6 +6,9 @@ class Item < ApplicationRecord
       update(deleted_at: Time.current)
     end
 
+    has_many :item_category_ships, dependent: :restrict_with_error
+    has_many :categories, through: :item_category_ships
+
     mount_uploader :image, ImageUploader
 
     validates :name, presence: true

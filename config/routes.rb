@@ -32,6 +32,7 @@ Rails.application.routes.draw do
         resources :items
         get 'users', to: 'users#index'
         post 'items/new', to: 'items#create'
+        resources :categories
       end
     end
   end
