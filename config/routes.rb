@@ -30,9 +30,9 @@ Rails.application.routes.draw do
       namespace :admin do
       devise_for :users, controllers: { sessions: 'admin/sessions' }
         resources :items
-        get 'users', to: 'users#index'
+        get 'users', to: 'users#index', as: 'userlist'
         post 'items/new', to: 'items#create'
-        resources :categories
+        resources :categories, except: [:show]
       end
     end
   end

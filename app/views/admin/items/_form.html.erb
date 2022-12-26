@@ -1,4 +1,4 @@
-<%= form_with model: @item, url: new_admin_item_path, data: { turbo: false } do |form| %>
+<%= form_with model: @item, url: new_admin_item_path, :html => {:multipart => true}, data: { turbo: false } do |form| %>
   <% if @item.errors.any? %>
     <ul>
       <% @item.errors.each do |error| %>
@@ -7,11 +7,16 @@
     </ul>
   <% end %>
 
-  <%= form_with model: item, authenticity_token: true, url: path do |f| %>
+  <%= form_with model: item, url: path do |f| %>
 
   <div class="form">
     <%= f.label :image, class: 'form-label' %><br>
     <%= f.file_field :image, class: 'form-control' %>
+  </div>
+
+  <div class="form-check-outline border">
+    <%= f.label :categories, class: 'fs-5'%><br>
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, class: 'form-check-input', for: 'defaultCheck1' %>
   </div>
 
   <div class="form">

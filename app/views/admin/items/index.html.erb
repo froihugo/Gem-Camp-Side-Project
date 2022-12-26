@@ -10,13 +10,14 @@
       <td>Offline At</td>
       <td>Start At</td>
       <td>Status</td>
+      <td>categories</td>
       <td colspan="2">Action</td>
     </tr>
   </th>
   <% @items.each do |item| %>
     <tbody>
     <tr>
-      <td><%= image_tag item.image.url %></td>
+      <td><%= image_tag item.image.url || default_iamge %></td>
       <td><%= item.name %></td>
       <td><%= item.quantity %></td>
       <td><%= item.minimum_bets %></td>
@@ -26,7 +27,7 @@
       <td><%= item.offline_at %></td>
       <td><%= item.start_at %></td>
       <td><%= item.status %></td>
-      <td><%= button_to 'Delete', admin_item_path(item), class: 'btn btn-outline-danger me-2', onclick: "return confirm('Are you sure you want to delete?')", method: :delete %></td>
+      <td><%= item.categories.pluck(:name).join(', ') %></td>
       <td><%= link_to 'Show', admin_item_path(item), class: 'btn btn-outline-danger me-2' %></td>
     </tr>
     </tbody>
