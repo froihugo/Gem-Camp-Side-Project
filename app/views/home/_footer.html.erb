@@ -6,6 +6,10 @@
         <% if user_signed_in? %>
           <%= link_to 'Invite', users_invites_path(current_user.username), :class => 'btn btn-dark' %>
           </li>
+          <% else %>
+          <%= link_to 'User list', admin_userlist_path, :class => 'btn btn-dark' %>
+          <%= link_to 'Item list', admin_items_path, :class => 'btn btn-dark' %>
+          <%= link_to 'Category', admin_categories_path, :class => 'btn btn-dark' %>
         <% end %>
     </ul>
     </div>

@@ -1,8 +1,10 @@
 class Admin::ItemsController < ApplicationController
-  before_action :set_item_params, only: [:destroy, :edit, :show, :update]
+  before_action :authenticate_admin_user!, except: [:index, :show]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :null_session
 
   def index
-    @items = Item.includes(:categories).all
+    @items = Item.includes(:categories)
   end
 
   def new
@@ -12,10 +14,10 @@ class Admin::ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      flash[:notice] = "Create Successfully"
+      flash[:notice] = "Item sucessfully added!"
       redirect_to admin_items_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
 
   end
@@ -27,10 +29,10 @@ class Admin::ItemsController < ApplicationController
   def update
     @item.update(item_params)
     if @item.save
-      flash[:notice] = "Update Successfully"
-      redirect_to admin_items_path
+      flash[:notice] = "Editted Successfully"
+      redirect_to admin_items_path(item.id)
     else
-      render :edit
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -45,7 +47,7 @@ class Admin::ItemsController < ApplicationController
     params.require(:item).permit(:image, :name, :quantity, :minimum_bets, :online_at, :offline_at, :start_at, :status, category_ids: [])
   end
 
-  def set_item_params
+  def set_item
     @item = Item.find(params[:id])
   end
 end

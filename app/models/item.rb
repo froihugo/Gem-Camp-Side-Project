@@ -1,22 +1,21 @@
 class Item < ApplicationRecord
+  default_scope { where(deleted_at: nil) }
 
-    default_scope { where(deleted_at: nil) }
+  has_many :item_category_ships, dependent: :restrict_with_error
+  has_many :categories, through: :item_category_ships
 
-    def destroy
-      update(deleted_at: Time.current)
-    end
+  mount_uploader :image, ImageUploader
 
-    has_many :item_category_ships, dependent: :restrict_with_error
-    has_many :categories, through: :item_category_ships
+  validates :name, presence: true
+  validates :minimum_bets, presence: true
+  validates :online_at, presence: true
+  validates :offline_at, presence: true
+  validates :start_at, presence: true
+  validates :status, presence: true
 
-    mount_uploader :image, ImageUploader
+  def destroy
+    update(deleted_at: Time.current)
+  end 
 
-    validates :name, presence: true
-    validates :minimum_bets, presence: true
-    validates :online_at, presence: true
-    validates :offline_at, presence: true
-    validates :start_at, presence: true
-    validates :status, presence: true
-
-    enum status: { Inactive: 0, Active: 1 }
-  end
+  enum status: { Inactive: 0, Active: 1 }
+end
